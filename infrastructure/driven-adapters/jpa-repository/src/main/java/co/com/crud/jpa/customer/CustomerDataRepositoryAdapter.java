@@ -24,4 +24,9 @@ public class CustomerDataRepositoryAdapter extends AdapterOperations<Customer, C
         return repository.findById(uuid)
                 .map(this::toEntity);
     }
+
+    @Override
+    public void deleteCustomer(String uuid) {
+        repository.deleteById(uuid);
+    }
 }
