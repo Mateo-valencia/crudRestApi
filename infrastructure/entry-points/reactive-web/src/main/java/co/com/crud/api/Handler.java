@@ -1,5 +1,7 @@
 package co.com.crud.api;
 
+import co.com.crud.model.costumer.Customer;
+import co.com.crud.usecase.createcustomer.CreateCustomerUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -9,8 +11,9 @@ import reactor.core.publisher.Mono;
 @Component
 @RequiredArgsConstructor
 public class Handler {
-//private  final UseCase useCase;
-//private  final UseCase2 useCase2;
+
+    private final CreateCustomerUseCase createCustomerUseCase;
+
     public Mono<ServerResponse> listenGETUseCase(ServerRequest serverRequest) {
         // usecase.logic();
         return ServerResponse.ok().bodyValue("");
@@ -24,5 +27,9 @@ public class Handler {
     public Mono<ServerResponse> listenPOSTUseCase(ServerRequest serverRequest) {
         // usecase.logic();
         return ServerResponse.ok().bodyValue("");
+    }
+
+    public Mono<ServerResponse> listenPOSTCreateCustomer(ServerRequest serverRequest) {
+        return ServerResponse.ok().bodyValue(createCustomerUseCase.createCustomer());
     }
 }
