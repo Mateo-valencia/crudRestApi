@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.QueryByExampleExecutor;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.util.stream.StreamSupport.stream;
 
@@ -39,12 +40,12 @@ public abstract class AdapterOperations<E, D, I, R extends CrudRepository<D, I> 
     }
 
     protected List<E> saveAllEntities(List<E> entities) {
-        List<D> list = entities.stream().map(this::toData).toList();
+        List<D> list = entities.stream().map(this::toData).collect(Collectors.toList());
         return toList(saveData(list));
     }
 
     public List<E> toList(Iterable<D> iterable) {
-        return stream(iterable.spliterator(), false).map(this::toEntity).toList();
+        return stream(iterable.spliterator(), false).map(this::toEntity).collect(Collectors.toList());
     }
 
     protected D saveData(D data) {
